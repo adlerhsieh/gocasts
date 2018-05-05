@@ -1,12 +1,11 @@
 package main
 
 import (
-	"github.com/adlerhsieh/gocasts/web/controllers"
+	"github.com/adlerhsieh/gocasts/web/handlers"
 
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/middleware/logger"
 	"github.com/kataras/iris/middleware/recover"
-	"github.com/kataras/iris/mvc"
 )
 
 func irisApp() *iris.Application {
@@ -18,7 +17,8 @@ func irisApp() *iris.Application {
 	app.RegisterView(iris.HTML("./web/views", ".html"))
 	app.StaticWeb("/assets", "./public/assets")
 
-	mvc.New(app).Handle(new(controllers.Screencasts))
+	app.Handle(iris.MethodGet, "/", handlers.Screencasts)
+	app.Handle(iris.MethodGet, "/{id:string}", handlers.Screencast)
 
 	return app
 }
