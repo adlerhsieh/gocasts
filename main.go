@@ -2,8 +2,9 @@ package main
 
 import "github.com/kataras/iris"
 
-func main() {
+func irisApp() *iris.Application {
 	app := iris.New()
+
 	// Load all templates from the "./views" folder
 	// where extension is ".html" and parse them
 	// using the standard `html/template` package.
@@ -18,6 +19,8 @@ func main() {
 		ctx.View("hello.html")
 	})
 
+	app.StaticWeb("/assets", "./public/assets")
+
 	// Method:    GET
 	// Resource:  http://localhost:8080/user/42
 	//
@@ -31,6 +34,12 @@ func main() {
 		userID, _ := ctx.Params().GetInt64("id")
 		ctx.Writef("User ID: %d", userID)
 	})
+
+	return app
+}
+
+func main() {
+	app := irisApp()
 
 	// Start the server using a network address.
 	app.Run(iris.Addr(":8080"))
