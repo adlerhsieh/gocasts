@@ -35,6 +35,13 @@ func (this *Screencast) GetBy(id string) mvc.View {
 	screencast := models.Screencast{}
 	db.DB.Where("id = ?", id).First(&screencast)
 
+	if screencast.ID == 0 {
+		return mvc.View{
+			Code: iris.StatusNotFound,
+			Name: "shared/404.html",
+		}
+	}
+
 	return mvc.View{
 		Name: "screencasts/show.html",
 		Data: iris.Map{
