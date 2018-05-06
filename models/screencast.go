@@ -1,6 +1,7 @@
 package models
 
 import (
+	"database/sql"
 	"time"
 
 	"github.com/jinzhu/gorm"
@@ -9,12 +10,12 @@ import (
 
 type Screencast struct {
 	gorm.Model
-	Slug         string
-	Title        string
-	Content      string    `sql:"type:text"`
-	Abstract     string    `sql:"type:text"`
-	VideoEmbed   string    `sql:"type:text"`
-	DisplayDate  time.Time `sql:"type:date"`
-	ThumbnailUrl string
-	Public       bool
+	Slug         string         `gorm:"unique_index;not null"`
+	Title        string         `gorm:"not null"`
+	Content      sql.NullString `sql:"type:text"`
+	Abstract     sql.NullString `sql:"type:text"`
+	VideoEmbed   sql.NullString `sql:"type:text"`
+	DisplayDate  time.Time      `sql:"type:date"`
+	ThumbnailUrl sql.NullString
+	Public       bool `gorm:"index:public"`
 }
