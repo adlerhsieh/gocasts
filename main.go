@@ -1,9 +1,11 @@
 package main
 
 import (
-	// "github.com/adlerhsieh/gocasts/web/handlers"
+	"github.com/adlerhsieh/gocasts/db"
+	"github.com/adlerhsieh/gocasts/models"
 	"github.com/adlerhsieh/gocasts/web/controllers"
 
+	// iris
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/middleware/logger"
 	"github.com/kataras/iris/middleware/recover"
@@ -12,6 +14,9 @@ import (
 
 func irisApp() *iris.Application {
 	app := iris.New()
+
+	// Database Automigration
+	db.DB.AutoMigrate(&models.Screencast{})
 
 	// Config
 	app.Use(recover.New())

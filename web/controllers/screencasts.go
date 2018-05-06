@@ -1,6 +1,9 @@
 package controllers
 
 import (
+	"github.com/adlerhsieh/gocasts/db"
+	"github.com/adlerhsieh/gocasts/models"
+
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/mvc"
 )
@@ -29,11 +32,14 @@ func (this *Screencast) Get() mvc.View {
 }
 
 func (this *Screencast) GetBy(id string) mvc.View {
+	screencast := models.Screencast{}
+	db.DB.Where("id = ?", id).First(&screencast)
+
 	return mvc.View{
 		Name: "screencasts/show.html",
 		Data: iris.Map{
 			"Layout": this.Layout,
-			"id":     id,
+			"title":  screencast.Title,
 		},
 	}
 }
