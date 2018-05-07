@@ -1,30 +1,3 @@
 <h2>New Screencast</h2>
 
-<form action="/screencasts" method="post">
-  <p>
-    <span>Title:</span><input type="text" name="Title" />
-  </p>
-  <p>
-    <span>Slug:</span><input type="text" name="Slug" />
-  </p>
-  <p>
-    <span>Content:</span><input type="textarea" name="Content" />
-  </p>
-  <p>
-    <span>Abstract:</span><input type="textarea" name="Abstract" />
-  </p>
-  <p>
-    <span>Video Embed:</span><input type="text" name="VideoEmbed" />
-  </p>
-  <p>
-    <span>Display Date:</span><input type="date" name="DisplayDate" />
-  </p>
-  <p>
-    <span>Thumbnail URL:</span><input type="text" name="ThumbnailUrl" />
-  </p>
-  <p>
-    <span>Public:</span><input type="checkbox" name="Public" />
-  </p>
-  
-  <input type="submit" value="Save"/>
-</form>
+{{ render "screencasts/_form.html"}}

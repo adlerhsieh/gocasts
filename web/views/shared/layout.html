@@ -5,7 +5,10 @@
   </head>
 
   <body>
-    <h4>{{.alert}}</h4>
+    {{if .alert}}
+      <h4>{{.alert}}</h4>
+    {{end}}
+
     {{ yield }}
   </body>
 
