@@ -34,9 +34,9 @@ func (this *Screencast) Get() mvc.View {
 	}
 }
 
-func (this *Screencast) GetBy(id string) mvc.View {
+func (this *Screencast) GetBy(slug string) mvc.View {
 	screencast := models.Screencast{}
-	db.DB.Where("id = ?", id).First(&screencast)
+	db.DB.Where("slug = ?", slug).First(&screencast)
 
 	if screencast.ID == 0 {
 		return notFound()
@@ -46,7 +46,6 @@ func (this *Screencast) GetBy(id string) mvc.View {
 		Name: "screencasts/show.html",
 		Data: iris.Map{
 			"Layout": this.Layout,
-			"title":  screencast.Title,
 		},
 	}
 }
@@ -60,9 +59,9 @@ func (this *Screencast) GetScreencastsNew() mvc.View {
 	}
 }
 
-func (this *Screencast) GetByEdit(id string) mvc.View {
+func (this *Screencast) GetByEdit(slug string) mvc.View {
 	screencast := models.Screencast{}
-	db.DB.Where("id = ?", id).First(&screencast)
+	db.DB.Where("slug = ?", slug).First(&screencast)
 
 	if screencast.ID == 0 {
 		return notFound()
@@ -71,8 +70,8 @@ func (this *Screencast) GetByEdit(id string) mvc.View {
 	return mvc.View{
 		Name: "screencasts/edit.html",
 		Data: iris.Map{
-			"Layout": this.Layout,
-			"title":  screencast.Title,
+			"Layout":     this.Layout,
+			"screencast": screencast,
 		},
 	}
 

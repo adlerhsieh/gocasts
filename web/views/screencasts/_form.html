@@ -1,27 +1,27 @@
 <form action="/screencasts" method="post">
   <p>
-    <span>Title:</span><input type="text" name="Title" />
+    <span>Title:</span><input type="text" name="Title" value="{{.screencast.Title.String}}" />
   </p>
   <p>
-    <span>Slug:</span><input type="text" name="Slug" />
+    <span>Slug:</span><input type="text" name="Slug" value="{{.screencast.Slug.String}}" />
   </p>
   <p>
-    <span>Content:</span><input type="textarea" name="Content" />
+    <span>Content:</span><input type="textarea" name="Content" value="{{.screencast.Content.String}}" />
   </p>
   <p>
-    <span>Abstract:</span><input type="textarea" name="Abstract" />
+    <span>Abstract:</span><input type="textarea" name="Abstract" value="{{.screencast.Abstract.String}}" />
   </p>
   <p>
-    <span>Video Embed:</span><input type="text" name="VideoEmbed" />
+    <span>Video Embed:</span><input type="text" name="VideoEmbed" value="{{.screencast.VideoEmbed.String}}" />
   </p>
   <p>
-    <span>Display Date:</span><input type="date" name="DisplayDate" />
+    <span>Display Date:</span><input type="date" name="DisplayDate" value="{{.screencast.DisplayDate}}" />
   </p>
   <p>
-    <span>Thumbnail URL:</span><input type="text" name="ThumbnailUrl" />
+    <span>Thumbnail URL:</span><input type="text" name="ThumbnailUrl" value="{{.screencast.ThumbnailUrl.String}}" />
   </p>
   <p>
-    <span>Public:</span><input type="checkbox" name="Public" />
+    <span>Public:</span><input type="checkbox" name="Public" value="{{.screencast.Public}}" />
   </p>
   
   <input type="submit" value="Save"/>
