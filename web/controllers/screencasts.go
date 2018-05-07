@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"database/sql"
-	// "fmt"
+	"time"
 
 	"github.com/adlerhsieh/gocasts/db"
 	"github.com/adlerhsieh/gocasts/models"
@@ -79,30 +79,50 @@ func (this *Screencast) GetByEdit(id string) mvc.View {
 }
 
 func bindFormToScreencast(ctx iris.Context) models.Screencast {
-	screencast := models.Screencast{
-		Title: ctx.FormValue("Title"),
-		Slug:  ctx.FormValue("Slug"),
+	screencast := models.Screencast{}
+	if title := ctx.FormValue("Title"); title != "" {
+		screencast.Title = sql.NullString{title, true}
 	}
-
+	if slug := ctx.FormValue("Slug"); slug != "" {
+		screencast.Slug = sql.NullString{slug, true}
+	}
 	if abstract := ctx.FormValue("Abstract"); abstract != "" {
 		screencast.Abstract = sql.NullString{abstract, true}
 	}
+	if content := ctx.FormValue("Content"); content != "" {
+		screencast.Content = sql.NullString{content, true}
+	}
+	if video_embed := ctx.FormValue("VideoEmbed"); video_embed != "" {
+		screencast.VideoEmbed = sql.NullString{video_embed, true}
+	}
+	if display_date := ctx.FormValue("DisplayDate"); display_date != "" {
+		display_date, err := time.Parse("2006-01-02", display_date)
+		if err != nil {
+		} else {
+			screencast.DisplayDate = display_date
+		}
+	}
+	if thumbnail_url := ctx.FormValue("ThumbnailUrl"); thumbnail_url != "" {
+		screencast.ThumbnailUrl = sql.NullString{thumbnail_url, true}
+	}
+	screencast.Public = (ctx.FormValue("Public") == "on")
 
 	return screencast
 }
 
 func (this *Screencast) PostScreencasts() mvc.View {
-
 	screencast := bindFormToScreencast(this.Ctx)
+	result := db.DB.Create(&screencast)
 
-	// err := this.Ctx.ReadForm(&screencast)
-
-	db.DB.Create(&screencast)
-
-	// if err != nil {
-	// 	fmt.Println(err)
-	// 	return internalServerError()
-	// }
+	if result.Error != nil {
+		return mvc.View{
+			Name: "screencasts/new.html",
+			Data: iris.Map{
+				"Layout": this.Layout,
+				"alert":  result.Error,
+			},
+		}
+	}
 
 	return mvc.View{
 		Name: "screencasts/index.html",
