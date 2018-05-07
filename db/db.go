@@ -13,5 +13,7 @@ func ConnectDB() *gorm.DB {
 		panic(err)
 	}
 
+	db.LogMode(true)
+
 	return db
 }
