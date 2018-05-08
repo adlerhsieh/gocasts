@@ -1,4 +1,4 @@
-<form action="/screencasts" method="post">
+<form action="/screencasts{{if .screencast}}/{{.screencast.Slug.String}}{{end}}" method="post">
   <p>
     <span>Title:</span><input type="text" name="Title" value="{{.screencast.Title.String}}" />
   </p>
@@ -21,8 +21,8 @@
     <span>Thumbnail URL:</span><input type="text" name="ThumbnailUrl" value="{{.screencast.ThumbnailUrl.String}}" />
   </p>
   <p>
-    <span>Public:</span><input type="checkbox" name="Public" value="{{.screencast.Public}}" />
+  <span>public:</span><input type="checkbox" name="public" {{ if .screencast }} {{ if eq .screencast.Public true }} checked {{ end }}{{ end }} />
   </p>
   
-  <input type="submit" value="Save"/>
+  <input type="submit" value="save"/>
 </form>
