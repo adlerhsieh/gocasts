@@ -21,7 +21,7 @@
     <span>Thumbnail URL:</span><input type="text" name="ThumbnailUrl" value="{{.screencast.ThumbnailUrl.String}}" />
   </p>
   <p>
-  <span>public:</span><input type="checkbox" name="public" {{ if .screencast }} {{ if eq .screencast.Public true }} checked {{ end }}{{ end }} />
+  <span>public:</span><input type="checkbox" name="Public" {{ if .screencast }} {{ if eq .screencast.Public true }} checked {{ end }}{{ end }} />
   </p>
   
   <input type="submit" value="save"/>
