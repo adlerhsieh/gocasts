@@ -1,6 +1,8 @@
 package main
 
 import (
+	"time"
+
 	"github.com/adlerhsieh/gocasts/db"
 	"github.com/adlerhsieh/gocasts/models"
 	"github.com/adlerhsieh/gocasts/web/controllers"
@@ -24,6 +26,9 @@ func irisApp() *iris.Application {
 
 	// View
 	templates := iris.HTML("./web/views", ".html").Layout("shared/layout.html").Reload(true)
+	templates.AddFunc("fmtDate", func(time time.Time) string {
+		return time.Format("2006-01-02")
+	})
 	app.RegisterView(templates)
 
 	// Assets
