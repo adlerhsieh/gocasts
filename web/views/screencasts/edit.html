@@ -3,3 +3,6 @@
 {{ render "screencasts/_form.html" }}
 
 <a href="/{{.screencast.Slug.String}}">Back</a>
+<form method="post" action="/screencasts/{{.screencast.Slug.String}}/delete">
+  <input type="submit" value="Delete" />
+</form>

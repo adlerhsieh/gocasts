@@ -15,7 +15,7 @@
     <span>Video Embed:</span><input type="text" name="VideoEmbed" value="{{.screencast.VideoEmbed.String}}" />
   </p>
   <p>
-    <span>Display Date:</span><input type="date" name="DisplayDate" value="{{fmtDate .screencast.DisplayDate }}" />
+  <span>Display Date:</span><input type="date" name="DisplayDate" value="{{ if .screencast }}{{ fmtDate .screencast.DisplayDate }}{{ end }}" />
   </p>
   <p>
     <span>Thumbnail URL:</span><input type="text" name="ThumbnailUrl" value="{{.screencast.ThumbnailUrl.String}}" />
