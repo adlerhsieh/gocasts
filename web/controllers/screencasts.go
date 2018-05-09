@@ -84,15 +84,47 @@ func (this *Screencast) GetByEdit(slug string) mvc.View {
 
 }
 
-func (this *Screencast) PostBy(slug string) mvc.Result {
+func (this *Screencast) PostScreencastsBy(slug string) mvc.Result {
 	screencast := models.Screencast{}
 	db.DB.Where("slug = ?", slug).First(&screencast)
+
+	fmt.Println(screencast)
+	screencast = bindFormToScreencast(this.Ctx, screencast)
+	fmt.Println(screencast)
+	result := db.DB.Save(&screencast)
+
+	if result.Error != nil {
+		return mvc.View{
+			Name: "screencasts/edit.html",
+			Data: iris.Map{
+				"Layout":     this.Layout,
+				"alert":      result.Error,
+				"screencast": screencast,
+			},
+		}
+	}
 
 	return mvc.Response{Path: "/" + screencast.Slug.String}
 }
 
-func bindFormToScreencast(ctx iris.Context) models.Screencast {
-	screencast := models.Screencast{}
+func (this *Screencast) PostScreencasts() mvc.Result {
+	screencast := bindFormToScreencast(this.Ctx, models.Screencast{})
+	result := db.DB.Create(&screencast)
+
+	if result.Error != nil {
+		return mvc.View{
+			Name: "screencasts/new.html",
+			Data: iris.Map{
+				"Layout": this.Layout,
+				"alert":  result.Error,
+			},
+		}
+	}
+
+	return mvc.Response{Path: "/" + screencast.Slug.String}
+}
+
+func bindFormToScreencast(ctx iris.Context, screencast models.Screencast) models.Screencast {
 	if title := ctx.FormValue("Title"); title != "" {
 		screencast.Title = sql.NullString{title, true}
 	}
@@ -121,21 +153,4 @@ func bindFormToScreencast(ctx iris.Context) models.Screencast {
 	screencast.Public = (ctx.FormValue("Public") == "on")
 
 	return screencast
-}
-
-func (this *Screencast) PostScreencasts() mvc.Result {
-	screencast := bindFormToScreencast(this.Ctx)
-	result := db.DB.Create(&screencast)
-
-	if result.Error != nil {
-		return mvc.View{
-			Name: "screencasts/new.html",
-			Data: iris.Map{
-				"Layout": this.Layout,
-				"alert":  result.Error,
-			},
-		}
-	}
-
-	return mvc.Response{Path: "/screencasts/" + screencast.Slug.String}
 }
