@@ -1,11 +1,13 @@
-<h2>Screencasts</h2>
+{{ define "content" }}
+  <h2>Screencasts</h2>
 
-<ul>
-  {{ range $screencast := .screencasts }}
-    <li>
-      <a href="/{{$screencast.Slug.String}}">{{$screencast.Title.String}}</a>
-    </li>
-  {{ end }}
-</ul>
+  <ul>
+    {{ range $screencast := .screencasts }}
+      <li>
+        <a href="/{{$screencast.Slug.String}}">{{$screencast.Title.String}}</a>
+      </li>
+    {{ end }}
+  </ul>
 
-<a href="/screencasts/new">New</a>
+  <a href="/screencasts/new">New</a>
+{{ end }}

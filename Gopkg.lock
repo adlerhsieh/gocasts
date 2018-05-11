@@ -39,6 +39,36 @@
 
 [[projects]]
   branch = "master"
+  name = "github.com/foolin/gin-template"
+  packages = ["."]
+  revision = "2240e379a153e24e8535112985feec454cb07a94"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/gin-contrib/sse"
+  packages = ["."]
+  revision = "22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae"
+
+[[projects]]
+  name = "github.com/gin-gonic/gin"
+  packages = [".","binding","render"]
+  revision = "d459835d2b077e44f7c9b453505ee29881d5d12d"
+  version = "v1.2"
+
+[[projects]]
+  name = "github.com/go-sql-driver/mysql"
+  packages = ["."]
+  revision = "a0583e0143b1624142adab07e0e97fe106d99561"
+  version = "v1.3"
+
+[[projects]]
+  name = "github.com/golang/protobuf"
+  packages = ["proto"]
+  revision = "b4deda0973fb4c70b50d226b1af49f3da59f5265"
+  version = "v1.1.0"
+
+[[projects]]
+  branch = "master"
   name = "github.com/hashicorp/go-version"
   packages = ["."]
   revision = "23480c0665776210b5fbbac6eaaee40e3e6a96b7"
@@ -48,6 +78,18 @@
   name = "github.com/iris-contrib/formBinder"
   packages = ["."]
   revision = "ad9fb86c356f971f30319c40ddbdcf72129a2791"
+
+[[projects]]
+  name = "github.com/jinzhu/gorm"
+  packages = [".","dialects/mysql"]
+  revision = "6ed508ec6a4ecb3531899a69cbc746ccf65a4166"
+  version = "v1.9.1"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/jinzhu/inflection"
+  packages = ["."]
+  revision = "04140366298a54a039076d798123ffa108fff46c"
 
 [[projects]]
   branch = "master"
@@ -69,7 +111,7 @@
 
 [[projects]]
   name = "github.com/kataras/iris"
-  packages = [".","cache","cache/cfg","cache/client","cache/client/rule","cache/entry","cache/ruleset","cache/uri","context","core/errors","core/handlerconv","core/host","core/maintenance","core/maintenance/version","core/memstore","core/netutil","core/router","core/router/macro","core/router/macro/interpreter/ast","core/router/macro/interpreter/lexer","core/router/macro/interpreter/parser","core/router/macro/interpreter/token","core/router/node","middleware/logger","middleware/recover","view"]
+  packages = [".","cache","cache/cfg","cache/client","cache/client/rule","cache/entry","cache/ruleset","cache/uri","context","core/errors","core/handlerconv","core/host","core/maintenance","core/maintenance/version","core/memstore","core/netutil","core/router","core/router/macro","core/router/macro/interpreter/ast","core/router/macro/interpreter/lexer","core/router/macro/interpreter/parser","core/router/macro/interpreter/token","core/router/node","hero","hero/di","middleware/logger","middleware/recover","mvc","sessions","view"]
   revision = "88fa66786e29e7874fe2e0669c478e019511b69b"
   version = "v10.6.3"
 
@@ -158,6 +200,12 @@
   revision = "86672fcb3f950f35f2e675df2240550f2a50762f"
 
 [[projects]]
+  name = "github.com/ugorji/go"
+  packages = ["codec"]
+  revision = "b4c50a2b199d93b13dc15e78929cfb23bfdf21ab"
+  version = "v1.1.1"
+
+[[projects]]
   branch = "master"
   name = "golang.org/x/crypto"
   packages = ["acme","acme/autocert"]
@@ -182,6 +230,12 @@
   version = "v1.5.3"
 
 [[projects]]
+  name = "gopkg.in/go-playground/validator.v8"
+  packages = ["."]
+  revision = "5f1438d3fca68893a817e4a66806cea46a9e4ebf"
+  version = "v8.18.2"
+
+[[projects]]
   branch = "v2"
   name = "gopkg.in/russross/blackfriday.v2"
   packages = ["."]
@@ -196,6 +250,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "ccb5c7cc1325d9237de3b62ba312c10dd1fccf8ca0f6613f473aed913dacf297"
+  inputs-digest = "5e6f2f3265bd2636c05d89702dce51a97e82e8b0116be547e0b26d20ccfcff4f"
   solver-name = "gps-cdcl"
   solver-version = 1
