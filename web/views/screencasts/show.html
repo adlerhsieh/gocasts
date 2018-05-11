@@ -1,5 +1,7 @@
-<h2>{{.screencast.Title.String}}</h2>
+{{ define "content" }}
+  <h2>{{.screencast.Title.String}}</h2>
 
-<a href="/{{.screencast.Slug.String}}/edit">Edit</a>
+  <a href="/{{.screencast.Slug.String}}/edit">Edit</a>
 
-<a href="/">Back</a>
+  <a href="/">Back</a>
+{{ end }}

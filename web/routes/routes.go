@@ -7,5 +7,6 @@ import (
 )
 
 func Draw(app *gin.Engine) {
-	app.GET("/", handlers.ScreencastIndex)
+	app.GET("/", handlers.Screencast["index"])
+	app.GET("/:slug", handlers.Screencast["show"])
 }

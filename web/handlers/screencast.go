@@ -9,11 +9,21 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func ScreencastIndex(c *gin.Context) {
-	screencasts := []models.Screencast{}
-	db.DB.Find(&screencasts)
+var Screencast = map[string]func(c *gin.Context){
+	"index": func(c *gin.Context) {
+		screencasts := []models.Screencast{}
+		db.DB.Find(&screencasts)
 
-	c.HTML(http.StatusOK, "screencasts/index", gin.H{
-		"screencasts": screencasts,
-	})
+		c.HTML(http.StatusOK, "screencasts/index", gin.H{
+			"screencasts": screencasts,
+		})
+	},
+	"show": func(c *gin.Context) {
+		screencast := models.Screencast{}
+		db.DB.Where("slug = ?", c.Param("slug")).First(&screencast)
+
+		c.HTML(http.StatusOK, "screencasts/show", gin.H{
+			"screencast": screencast,
+		})
+	},
 }
