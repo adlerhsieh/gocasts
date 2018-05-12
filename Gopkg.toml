@@ -20,7 +20,9 @@
 #  name = "github.com/x/y"
 #  version = "2.4.0"
 
-
-[[constraint]]
-  name = "github.com/kataras/iris"
-  version = "10.6.3"
+[metadata.heroku]
+  root-package = "github.com/heroku/fixture"
+  go-version = "go1.10.2"
+  install = [ "." ]
+  ensure = "true"
+  additional-tools = ["github.com/mattes/migrate"]
