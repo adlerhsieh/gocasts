@@ -32,6 +32,7 @@ func viewConfig() *gintemplate.TemplateEngine {
 		Master:    "shared/layout",
 		Partials: []string{
 			"screencasts/_form",
+			"screencasts/_highlight.js",
 		},
 		Funcs: template.FuncMap{
 			"fmtDate": func(time time.Time) string {
