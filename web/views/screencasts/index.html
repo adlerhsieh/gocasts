@@ -4,7 +4,7 @@
   <ul>
     {{ range $screencast := .screencasts }}
       <li>
-        <a href="/{{$screencast.Slug.String}}">{{$screencast.Title.String}}</a>
+        <a href="/s/{{$screencast.Slug.String}}">{{$screencast.Title.String}}</a>
       </li>
     {{ end }}
   </ul>

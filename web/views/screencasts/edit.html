@@ -1,8 +1,10 @@
-<h2>Edit {{ .screencast.Title.String }}</h2>
+{{ define "content" }}
+  <h2>Edit {{ .screencast.Title.String }}</h2>
 
-{{ render "screencasts/_form.html" }}
+  {{ include "screencasts/_form" }}
 
-<a href="/{{.screencast.Slug.String}}">Back</a>
-<form method="post" action="/screencasts/{{.screencast.Slug.String}}/delete">
-  <input type="submit" value="Delete" />
-</form>
+  <a href="/s/{{.screencast.Slug.String}}">Back</a>
+  <form method="post" action="/screencasts/destroy/{{.screencast.Slug.String}}">
+    <input type="submit" value="Delete" />
+  </form>
+{{ end }}

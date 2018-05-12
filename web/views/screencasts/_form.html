@@ -1,4 +1,4 @@
-<form action="/screencasts{{if .screencast}}/{{.screencast.Slug.String}}{{end}}" method="post">
+<form action="/screencasts{{if .screencast}}/update/{{.screencast.Slug.String}}{{end}}" method="post">
   <p>
     <span>Title:</span><input type="text" name="Title" value="{{.screencast.Title.String}}" />
   </p>
@@ -15,7 +15,7 @@
     <span>Video Embed:</span><input type="text" name="VideoEmbed" value="{{.screencast.VideoEmbed.String}}" />
   </p>
   <p>
-  <span>Display Date:</span><input type="date" name="DisplayDate" value="{{ if .screencast }}{{ fmtDate .screencast.DisplayDate }}{{ end }}" />
+  <span>Display Date:</span><input type="date" name="DisplayDate" value="{{ if .screencast }}{{ .screencast.DisplayDate | fmtDate }}{{ end }}" />
   </p>
   <p>
     <span>Thumbnail URL:</span><input type="text" name="ThumbnailUrl" value="{{.screencast.ThumbnailUrl.String}}" />

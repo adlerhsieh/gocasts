@@ -1,5 +1,7 @@
-<h2>New Screencast</h2>
+{{ define "content" }}
+  <h2>New Screencast</h2>
 
-{{ render "screencasts/_form.html" }}
+  {{ include "screencasts/_form" }}
 
-<a href="/">Back</a>
+  <a href="/">Back</a>
+{{ end }}

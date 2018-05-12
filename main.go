@@ -58,6 +58,9 @@ func viewConfig() *gintemplate.TemplateEngine {
 		Root:      "web/views",
 		Extension: ".html",
 		Master:    "shared/layout",
+		Partials: []string{
+			"screencasts/_form",
+		},
 		Funcs: template.FuncMap{
 			"fmtDate": func(time time.Time) string {
 				return time.Format("2006-01-02")
