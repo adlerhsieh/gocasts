@@ -1,0 +1,10 @@
+.site-logo {
+  width: 150px;
+}
+
+.navbar {
+  background-color: #00263d;
+  height: 60px;
+  padding-left: 25px;
+  padding-right: 25px;
+}
