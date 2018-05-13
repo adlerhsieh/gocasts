@@ -33,7 +33,7 @@
 
 [[projects]]
   name = "github.com/jinzhu/gorm"
-  packages = [".","dialects/mysql"]
+  packages = [".","dialects/mysql","dialects/postgres"]
   revision = "6ed508ec6a4ecb3531899a69cbc746ccf65a4166"
   version = "v1.9.1"
 
@@ -44,10 +44,22 @@
   revision = "04140366298a54a039076d798123ffa108fff46c"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/lib/pq"
+  packages = [".","hstore","oid"]
+  revision = "d34b9ff171c21ad295489235aec8b6626023cd04"
+
+[[projects]]
   name = "github.com/mattn/go-isatty"
   packages = ["."]
   revision = "0360b2af4f38e8d38c7fce2a9f4e702702d73a39"
   version = "v0.0.3"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/shurcooL/sanitized_anchor_name"
+  packages = ["."]
+  revision = "86672fcb3f950f35f2e675df2240550f2a50762f"
 
 [[projects]]
   name = "github.com/ugorji/go"
@@ -82,6 +94,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "c4bfa333e54dcec794c88f9dbb860f41543c9be3ef1c23725a7a1d8954822eb9"
+  inputs-digest = "71c38dcee0f0f38ee3e3da4db6a09537953a5122af04cfa797a2a9105e5e072e"
   solver-name = "gps-cdcl"
   solver-version = 1
