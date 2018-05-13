@@ -10,6 +10,7 @@ import (
 
 	"github.com/foolin/gin-template"
 	"github.com/gin-gonic/gin"
+	"gopkg.in/russross/blackfriday.v2"
 )
 
 func main() {
@@ -37,6 +38,10 @@ func viewConfig() *gintemplate.TemplateEngine {
 		Funcs: template.FuncMap{
 			"fmtDate": func(time time.Time) string {
 				return time.Format("2006-01-02")
+			},
+			"toMarkdown": func(str string) template.HTML {
+				output := string(blackfriday.Run([]byte(str)))
+				return template.HTML(output)
 			},
 		},
 		DisableCache: true,

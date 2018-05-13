@@ -1,6 +1,10 @@
 {{ define "content" }}
   <h2>{{.screencast.Title.String}}</h2>
 
+  <div>
+    {{ .screencast.Content.String | toMarkdown }}
+  </div>
+
   <a href="/screencasts/edit/{{.screencast.Slug.String}}">Edit</a>
 
   <a href="/">Back</a>
