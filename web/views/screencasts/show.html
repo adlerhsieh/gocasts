@@ -1,8 +1,27 @@
 {{ define "content" }}
-  <h2>{{.screencast.Title.String}}</h2>
+  {{ include "screencasts/_screencasts.css" }}
 
-  <div>
-    {{ .screencast.Content.String | toMarkdown }}
+  <div style="margin-top: 50px;"></div>
+
+  <div class="screencast">
+
+    <div class="video-container">
+      {{ .screencast.VideoEmbed.String | toHTML }}
+    </div>
+
+    <div style="margin-top: 30px;"></div>
+
+    <h1>{{.screencast.Title.String}}</h1>
+    <p class="date">Posted by <a class="author" href="/">Adler Hsieh</a> at {{ .screencast.DisplayDate | fmtDate }}</p>
+
+    <div style="margin-top: 30px;"></div>
+
+    <div>
+      {{ .screencast.Abstract.String }}
+      <hr />
+      <p class="note-title">Notes</p>
+      {{ .screencast.Content.String | toMarkdown | toHTML }}
+    </div>
   </div>
 
   <a href="/screencasts/edit/{{.screencast.Slug.String}}">Edit</a>

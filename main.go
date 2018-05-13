@@ -42,14 +42,17 @@ func viewConfig() *gintemplate.TemplateEngine {
 			"screencasts/_highlight.js",
 
 			// CSS
+			"screencasts/_screencasts.css",
 		},
 		Funcs: template.FuncMap{
 			"fmtDate": func(time time.Time) string {
 				return time.Format("2006-01-02")
 			},
-			"toMarkdown": func(str string) template.HTML {
-				output := string(blackfriday.Run([]byte(str)))
-				return template.HTML(output)
+			"toMarkdown": func(str string) string {
+				return string(blackfriday.Run([]byte(str)))
+			},
+			"toHTML": func(str string) template.HTML {
+				return template.HTML(str)
 			},
 		},
 		DisableCache: true,

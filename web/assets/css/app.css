@@ -8,3 +8,11 @@
   padding-left: 25px;
   padding-right: 25px;
 }
+
+.edit-label {
+  margin-bottom: 10px;
+}
+
+.edit-textarea {
+  height: 200px;
+}

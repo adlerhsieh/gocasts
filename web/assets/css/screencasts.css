@@ -1,0 +1,60 @@
+.screencast-item .thumbnail {
+  width: 325px;
+}
+
+.screencast-item a {
+  color: black;
+}
+
+.screencast-item a:hover {
+  text-decoration: none;
+}
+
+.screencast-item .title {
+  font-size: 24px;
+}
+
+.screencast-item .date {
+  font-size: 14px;
+  color: #afafaf;
+}
+
+.screencast-item .abstract {
+  font-size: 14px;
+}
+
+.screencast .video {
+  width: 100%;
+  height: 100%;
+}
+
+.screencast .video-container {
+  height: 554px;
+}
+
+.screencast .date, .screencast .author {
+  color: #afafaf;
+}
+
+.screencast .note-title {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+@media all and (max-width: 1200px) {
+  .screencast .video-container {
+    height: 523px;
+  }
+}
+
+@media all and (max-width: 992px) {
+  .screencast .video-container {
+    height: 388px;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .screencast .video-container {
+    height: 287px;
+  }
+}

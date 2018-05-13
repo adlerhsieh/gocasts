@@ -1,13 +1,20 @@
 {{ define "content" }}
-  <h2>Screencasts</h2>
+  {{ include "screencasts/_screencasts.css" }}
 
-  <ul>
-    {{ range $screencast := .screencasts }}
-      <li>
-        <a href="/s/{{$screencast.Slug.String}}">{{$screencast.Title.String}}</a>
-      </li>
-    {{ end }}
-  </ul>
+  <div style="margin-top: 50px;"></div>
 
-  <a href="/screencasts/new">New</a>
+  {{ range $screencast := .screencasts }}
+    <div class="row screencast-item">
+      <div class="col-4">
+        <a href="/s/{{$screencast.Slug.String}}">
+          <img src="{{ $screencast.ThumbnailUrl.String }}" class="thumbnail" />
+        </a>
+      </div>
+      <div class="col">
+        <a href="/s/{{$screencast.Slug.String}}" class="title">{{$screencast.Title.String}}</a>
+        <p class="date">{{ $screencast.DisplayDate | fmtDate }}</p>
+        <p class="abstract">{{ $screencast.Abstract.String }}</p>
+      </div>
+    </div>
+  {{ end }}
 {{ end }}

@@ -1,28 +1,39 @@
-<form action="/screencasts{{if .screencast}}/update/{{.screencast.Slug.String}}{{end}}" method="post">
+<form action="/screencasts{{if .screencast}}/update/{{.screencast.Slug.String}}{{end}}" method="post" id="screencast-form">
   <p>
-    <span>Title:</span><input type="text" name="Title" value="{{.screencast.Title.String}}" />
+    <div class="edit-label">Title</div>
+    <input type="text" name="Title" class="form-control" value="{{.screencast.Title.String}}" />
   </p>
   <p>
-    <span>Slug:</span><input type="text" name="Slug" value="{{.screencast.Slug.String}}" />
+    <div class="edit-label">Slug</div>
+    <input type="text" name="Slug" class="form-control" value="{{.screencast.Slug.String}}" />
   </p>
   <p>
-    <span>Content:</span><input type="textarea" name="Content" value="{{.screencast.Content.String}}" />
+    <div class="edit-label">Content</div>
+    <textarea name="Content" class="form-control edit-textarea">
+      {{.screencast.Content.String}}" />
+    </textarea>
   </p>
   <p>
-    <span>Abstract:</span><input type="textarea" name="Abstract" value="{{.screencast.Abstract.String}}" />
+    <div class="edit-label">Abstract</div>
+    <textarea name="Abstract" class="form-control edit-textarea">
+      {{.screencast.Abstract.String}}
+    </textarea>
   </p>
   <p>
-    <span>Video Embed:</span><input type="text" name="VideoEmbed" value="{{.screencast.VideoEmbed.String}}" />
+    <div class="edit-label">Video Embed</div>
+    <input type="text" name="VideoEmbed" class="form-control" value="{{.screencast.VideoEmbed.String}}" />
   </p>
   <p>
-  <span>Display Date:</span><input type="date" name="DisplayDate" value="{{ if .screencast }}{{ .screencast.DisplayDate | fmtDate }}{{ end }}" />
+  <div class="edit-label">Display Date</div>
+  <input type="date" name="DisplayDate" class="form-control" value="{{ if .screencast }}{{ .screencast.DisplayDate | fmtDate }}{{ end }}" />
   </p>
   <p>
-    <span>Thumbnail URL:</span><input type="text" name="ThumbnailUrl" value="{{.screencast.ThumbnailUrl.String}}" />
+    <div class="edit-label">Thumbnail URL</div>
+    <input type="text" name="ThumbnailUrl" class="form-control" value="{{.screencast.ThumbnailUrl.String}}" />
   </p>
   <p>
-  <span>public:</span><input type="checkbox" name="Public" {{ if .screencast }} {{ if eq .screencast.Public true }} checked {{ end }}{{ end }} />
+  <div>Public</div><input type="checkbox" name="Public" {{ if .screencast }} {{ if eq .screencast.Public true }} checked {{ end }}{{ end }} />
   </p>
   
-  <input type="submit" value="save"/>
+  <input type="submit" value="save" class="btn btn-primary"/>
 </form>
