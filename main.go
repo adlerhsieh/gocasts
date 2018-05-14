@@ -10,7 +10,7 @@ import (
 
 	"github.com/foolin/gin-template"
 	"github.com/gin-gonic/gin"
-	"gopkg.in/russross/blackfriday.v2"
+	"github.com/russross/blackfriday"
 )
 
 func main() {
@@ -49,7 +49,15 @@ func viewConfig() *gintemplate.TemplateEngine {
 				return time.Format("2006-01-02")
 			},
 			"toMarkdown": func(str string) string {
-				return string(blackfriday.Run([]byte(str)))
+
+				// option := blackfriday.WithRenderer(blackfriday.NewHTMLRenderer(
+				// 	blackfriday.HTMLRendererParameters{
+				// 		Flags: blackfriday.CommonHTMLFlags,
+				// 	},
+				// ))
+
+				// return string(blackfriday.Run([]byte(str), option))
+				return string(blackfriday.MarkdownCommon([]byte(str)))
 			},
 			"toHTML": func(str string) template.HTML {
 				return template.HTML(str)
