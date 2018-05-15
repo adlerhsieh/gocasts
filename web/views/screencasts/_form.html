@@ -14,7 +14,7 @@
   </p>
   <p>
     <div class="edit-label">Content</div>
-    <div id="editor" class="edit-textarea">{{.screencast.Content.String | toHTML }}</div>
+    <div id="editor" class="edit-textarea">{{if .screencast}}{{.screencast.Content.String | toHTML }}{{end}}</div>
     <textarea id="content-textarea" name="Content" style="display: none;"></textarea>
   </p>
   <p>

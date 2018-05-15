@@ -14,7 +14,7 @@ import (
 var Screencast = map[string]func(c *gin.Context){
 	"index": func(c *gin.Context) {
 		screencasts := []models.Screencast{}
-		db.DB.Find(&screencasts)
+		db.DB.Order("display_date desc").Find(&screencasts)
 
 		c.HTML(http.StatusOK, "screencasts/index", gin.H{
 			"screencasts": screencasts,
