@@ -15,5 +15,7 @@ func Draw(app *gin.Engine) {
 	app.POST("/screencasts/update/:slug", handlers.Screencast["update"])
 	app.POST("/screencasts/destroy/:slug", handlers.Screencast["destroy"])
 
+	app.GET("/author", handlers.Author["show"])
+
 	app.Static("/assets", "./web/assets")
 }
