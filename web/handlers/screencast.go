@@ -24,6 +24,11 @@ var Screencast = map[string]func(c *gin.Context){
 		screencast := models.Screencast{}
 		db.DB.Where("slug = ?", c.Param("slug")).First(&screencast)
 
+		if screencast.ID == 0 {
+			c.Redirect(http.StatusMovedPermanently, screencast.Path("index"))
+			return
+		}
+
 		c.HTML(http.StatusOK, "screencasts/show", gin.H{
 			"screencast": screencast,
 		})
