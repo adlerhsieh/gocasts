@@ -1,5 +1,11 @@
 {{ define "content" }}
   {{ include "screencasts/_screencasts.css" }}
+  {{ include "screencasts/_quill.css" }}
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
   <div style="margin-top: 50px;"></div>
 
@@ -20,7 +26,9 @@
       {{ .screencast.Abstract.String }}
       <hr />
       <p class="note-title">Notes</p>
-      {{ .screencast.Content.String | toMarkdown | toHTML }}
+      <div class="content">
+        {{ .screencast.Content.String | toHTML }}
+      </div>
     </div>
   </div>
 
@@ -28,5 +36,4 @@
 
   <a href="/">Back</a>
 
-  {{ include "screencasts/_highlight.js" }}
 {{ end }}
