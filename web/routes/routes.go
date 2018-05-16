@@ -7,6 +7,7 @@ import (
 )
 
 func Draw(app *gin.Engine) {
+	// Screencast
 	app.GET("/", handlers.Screencast["index"])
 	app.GET("/s/:slug", handlers.Screencast["show"])
 	app.GET("/screencasts/new", handlers.Screencast["new"])
@@ -15,7 +16,18 @@ func Draw(app *gin.Engine) {
 	app.POST("/screencasts/update/:slug", handlers.Screencast["update"])
 	app.POST("/screencasts/destroy/:slug", handlers.Screencast["destroy"])
 
+	// MISC
 	app.GET("/author", handlers.Author["show"])
 
+	// User
+	app.GET("/signup", handlers.User["new"])
+	app.POST("/users/create", handlers.User["create"])
+
+	// Session
+	app.GET("/signin", handlers.Session["new"])
+	app.POST("/signin", handlers.Session["create"])
+	app.POST("/signout", handlers.Session["destroy"])
+
+	// Assets
 	app.Static("/assets", "./web/assets")
 }
