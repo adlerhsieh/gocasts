@@ -1,0 +1,32 @@
+---
+env:
+  USER: express
+  HOST: 167.99.67.81 
+  HOME: /home/$USER
+  DIR: $HOME/go/src/github.com/adlerhsieh/gocasts
+  GO_BIN: /usr/lib/go-1.10/bin/go
+  DEP_BIN: /home/express/go/bin/dep
+  GOPATH: /home/$USER/go
+
+networks:
+  production:
+    hosts:
+      - express@167.99.67.81
+commands:
+  pull:
+    desc: git pull
+    run: cd $DIR && git pull
+  dep:
+    desc: install dependencies
+    run: cd $DIR && $DEP_BIN ensure
+  build:
+    desc: build
+    run: cd $DIR && $GO_BIN build -v -o gocasts *.go
+  restart:
+    desc: Restart nginx
+    run: sudo service nginx restart
+targets:
+  deploy:
+    - pull
+    - build
+    - restart
