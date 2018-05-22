@@ -1,0 +1,20 @@
+{{ define "content" }}
+  {{ if .msg }}
+    <p>{{ .msg }}</p>
+  {{ end }}
+  <form action="/users/create" method="post">
+    <p>
+      <div class="edit-label">Email</div>
+      <input type="text" name="Email" class="form-control" value="" />
+    </p>
+    <p>
+      <div class="edit-label">Username</div>
+      <input type="text" name="Username" class="form-control" value="" />
+    </p>
+    <p>
+      <div class="edit-label">password</div>
+      <input type="password" name="Password" class="form-control" value="" />
+    </p>
+    <input type="submit" value="save" class="btn btn-primary"/>
+  </form>
+{{ end }}

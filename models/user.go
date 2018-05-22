@@ -21,6 +21,16 @@ func (this *User) IsAdmin() bool {
 	return this.Role.String == "admin"
 }
 
+func (this *User) Save() *User {
+	if this.ID == 0 {
+		db.DB.Create(this)
+	} else {
+		db.DB.Save(this)
+	}
+
+	return this
+}
+
 func AuthenticateUser(email string, password string) User {
 	user := User{}
 	db.DB.Where("email = ?", email).First(&user)

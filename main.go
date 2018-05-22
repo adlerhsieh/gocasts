@@ -17,6 +17,7 @@ func main() {
 
 	// Database Automigration
 	db.DB.AutoMigrate(&models.Screencast{})
+	db.DB.AutoMigrate(&models.User{})
 
 	app.HTMLRender = viewConfig()
 
