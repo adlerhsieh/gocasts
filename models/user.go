@@ -31,6 +31,10 @@ func (this *User) Save() *User {
 	return this
 }
 
+func (this *User) FindByEmail(email string) {
+	db.DB.Where("email = ?", email).First(this)
+}
+
 func AuthenticateUser(email string, password string) User {
 	user := User{}
 	db.DB.Where("email = ?", email).First(&user)
