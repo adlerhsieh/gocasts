@@ -5,12 +5,19 @@ import (
 
 	"github.com/adlerhsieh/gocasts/models"
 
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 )
 
 var Session = map[string]func(c *gin.Context){
 	"new": func(c *gin.Context) {
+		user := currentUser(c)
+
+		if user.ID != 0 {
+			c.Redirect(http.StatusMovedPermanently, "/")
+		}
+
 		c.HTML(http.StatusOK, "sessions/new", gin.H{})
 	},
 	"create": func(c *gin.Context) {
@@ -25,10 +32,18 @@ var Session = map[string]func(c *gin.Context){
 				"msg": "Email or Password not matched",
 			})
 		} else {
+			session := sessions.Default(c)
+			session.Set("id", user.ID)
+			session.Save()
+
 			c.Redirect(http.StatusMovedPermanently, "/")
 		}
 	},
 	"destroy": func(c *gin.Context) {
+		session := sessions.Default(c)
+		session.Delete("id")
+		session.Save()
 
+		c.Redirect(http.StatusMovedPermanently, "/")
 	},
 }

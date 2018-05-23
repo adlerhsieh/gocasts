@@ -26,7 +26,7 @@ func Draw(app *gin.Engine) {
 	// Session
 	app.GET("/signin", handlers.Session["new"])
 	app.POST("/signin", handlers.Session["create"])
-	app.POST("/signout", handlers.Session["destroy"])
+	app.GET("/signout", handlers.Session["destroy"])
 
 	// Assets
 	app.Static("/assets", "./web/assets")

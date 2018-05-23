@@ -18,6 +18,7 @@ var Screencast = map[string]func(c *gin.Context){
 
 		c.HTML(http.StatusOK, "screencasts/index", gin.H{
 			"screencasts": screencasts,
+			"currentUser": currentUser(c),
 		})
 	},
 	"show": func(c *gin.Context) {
@@ -30,11 +31,14 @@ var Screencast = map[string]func(c *gin.Context){
 		}
 
 		c.HTML(http.StatusOK, "screencasts/show", gin.H{
-			"screencast": screencast,
+			"screencast":  screencast,
+			"currentUser": currentUser(c),
 		})
 	},
 	"new": func(c *gin.Context) {
-		c.HTML(http.StatusOK, "screencasts/new", gin.H{})
+		c.HTML(http.StatusOK, "screencasts/new", gin.H{
+			"currentUser": currentUser(c),
+		})
 	},
 	"create": func(c *gin.Context) {
 		screencast := bindFormToScreencast(c, models.Screencast{})
@@ -42,7 +46,8 @@ var Screencast = map[string]func(c *gin.Context){
 
 		if result.Error != nil {
 			c.HTML(http.StatusOK, "screencasts/new", gin.H{
-				"screencast": screencast,
+				"screencast":  screencast,
+				"currentUser": currentUser(c),
 			})
 		}
 
@@ -53,7 +58,8 @@ var Screencast = map[string]func(c *gin.Context){
 		db.DB.Where("slug = ?", c.Param("slug")).First(&screencast)
 
 		c.HTML(http.StatusOK, "screencasts/edit", gin.H{
-			"screencast": screencast,
+			"screencast":  screencast,
+			"currentUser": currentUser(c),
 		})
 	},
 	"update": func(c *gin.Context) {
@@ -65,7 +71,8 @@ var Screencast = map[string]func(c *gin.Context){
 
 		if result.Error != nil {
 			c.HTML(http.StatusOK, "screencasts/new", gin.H{
-				"screencast": screencast,
+				"screencast":  screencast,
+				"currentUser": currentUser(c),
 			})
 		}
 
@@ -75,8 +82,6 @@ var Screencast = map[string]func(c *gin.Context){
 		screencast := models.Screencast{}
 		db.DB.Where("slug = ?", c.Param("slug")).First(&screencast)
 
-		if screencast.ID == 0 {
-		}
 		db.DB.Delete(&screencast)
 
 		c.Redirect(http.StatusMovedPermanently, screencast.Path("index"))

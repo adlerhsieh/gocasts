@@ -9,11 +9,16 @@ import (
 	"github.com/adlerhsieh/gocasts/web/routes"
 
 	"github.com/foolin/gin-template"
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	app := gin.Default()
+
+	store := cookie.NewStore([]byte("secret"))
+	app.Use(sessions.Sessions("mysession", store))
 
 	// Database Automigration
 	db.DB.AutoMigrate(&models.Screencast{})
