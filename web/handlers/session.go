@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/adlerhsieh/gocasts/models"
@@ -12,9 +13,7 @@ import (
 
 var Session = map[string]func(c *gin.Context){
 	"new": func(c *gin.Context) {
-		user := currentUser(c)
-
-		if user.ID != 0 {
+		if currentUser(c).ID != 0 {
 			c.Redirect(http.StatusMovedPermanently, "/")
 		}
 
@@ -42,7 +41,10 @@ var Session = map[string]func(c *gin.Context){
 	"destroy": func(c *gin.Context) {
 		session := sessions.Default(c)
 		session.Delete("id")
-		session.Save()
+		err := session.Save()
+		if err != nil {
+			fmt.Println(err)
+		}
 
 		c.Redirect(http.StatusMovedPermanently, "/")
 	},

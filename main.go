@@ -6,6 +6,7 @@ import (
 
 	"github.com/adlerhsieh/gocasts/db"
 	"github.com/adlerhsieh/gocasts/models"
+	"github.com/adlerhsieh/gocasts/utils"
 	"github.com/adlerhsieh/gocasts/web/routes"
 
 	"github.com/foolin/gin-template"
@@ -14,15 +15,28 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func main() {
-	app := gin.Default()
+var secret string
 
-	store := cookie.NewStore([]byte("secret"))
-	app.Use(sessions.Sessions("mysession", store))
-
+func init() {
 	// Database Automigration
 	db.DB.AutoMigrate(&models.Screencast{})
 	db.DB.AutoMigrate(&models.User{})
+	db.DB.AutoMigrate(&models.Config{})
+
+	s := models.Config{Key: "secret"}
+	s.Get()
+	if s.Value == "" {
+		s.Value = utils.SecretString(128)
+		s.Save()
+	}
+	secret = s.Value
+}
+
+func main() {
+	app := gin.Default()
+
+	store := cookie.NewStore([]byte(secret))
+	app.Use(sessions.Sessions("gocasts", store))
 
 	app.HTMLRender = viewConfig()
 
