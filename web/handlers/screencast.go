@@ -18,7 +18,7 @@ var Screencast = map[string]func(c *gin.Context){
 
 		c.HTML(http.StatusOK, "screencasts/index", gin.H{
 			"screencasts": screencasts,
-			"currentUser": currentUser(c),
+			"currentUser": c.MustGet("currentUser"),
 		})
 	},
 	"show": func(c *gin.Context) {
@@ -26,18 +26,18 @@ var Screencast = map[string]func(c *gin.Context){
 		db.DB.Where("slug = ?", c.Param("slug")).First(&screencast)
 
 		if screencast.ID == 0 {
-			c.Redirect(http.StatusMovedPermanently, screencast.Path("index"))
+			c.Redirect(http.StatusMovedPermanently, "/")
 			return
 		}
 
 		c.HTML(http.StatusOK, "screencasts/show", gin.H{
 			"screencast":  screencast,
-			"currentUser": currentUser(c),
+			"currentUser": c.MustGet("currentUser"),
 		})
 	},
 	"new": func(c *gin.Context) {
 		c.HTML(http.StatusOK, "screencasts/new", gin.H{
-			"currentUser": currentUser(c),
+			"currentUser": c.MustGet("currentUser"),
 		})
 	},
 	"create": func(c *gin.Context) {
@@ -47,11 +47,11 @@ var Screencast = map[string]func(c *gin.Context){
 		if result.Error != nil {
 			c.HTML(http.StatusOK, "screencasts/new", gin.H{
 				"screencast":  screencast,
-				"currentUser": currentUser(c),
+				"currentUser": c.MustGet("currentUser"),
 			})
 		}
 
-		c.Redirect(http.StatusMovedPermanently, screencast.Path("show"))
+		c.Redirect(http.StatusMovedPermanently, "/s/"+screencast.Slug.String)
 	},
 	"edit": func(c *gin.Context) {
 		screencast := models.Screencast{}
@@ -59,7 +59,7 @@ var Screencast = map[string]func(c *gin.Context){
 
 		c.HTML(http.StatusOK, "screencasts/edit", gin.H{
 			"screencast":  screencast,
-			"currentUser": currentUser(c),
+			"currentUser": c.MustGet("currentUser"),
 		})
 	},
 	"update": func(c *gin.Context) {
@@ -72,11 +72,11 @@ var Screencast = map[string]func(c *gin.Context){
 		if result.Error != nil {
 			c.HTML(http.StatusOK, "screencasts/new", gin.H{
 				"screencast":  screencast,
-				"currentUser": currentUser(c),
+				"currentUser": c.MustGet("currentUser"),
 			})
 		}
 
-		c.Redirect(http.StatusMovedPermanently, screencast.Path("show"))
+		c.Redirect(http.StatusMovedPermanently, "/s/"+screencast.Slug.String)
 	},
 	"destroy": func(c *gin.Context) {
 		screencast := models.Screencast{}
@@ -84,7 +84,7 @@ var Screencast = map[string]func(c *gin.Context){
 
 		db.DB.Delete(&screencast)
 
-		c.Redirect(http.StatusMovedPermanently, screencast.Path("index"))
+		c.Redirect(http.StatusMovedPermanently, "/")
 	},
 }
 

@@ -8,7 +8,7 @@
   {{ include "screencasts/_form" }}
 
   <a href="/s/{{.screencast.Slug.String}}" class="btn btn-light">Back</a>
-  <form method="post" action="/screencasts/destroy/{{.screencast.Slug.String}}">
+  <form method="post" action="/admin/screencasts/destroy/{{.screencast.Slug.String}}">
     <input type="submit" value="Delete" class="btn btn-danger" />
   </form>
 {{ end }}

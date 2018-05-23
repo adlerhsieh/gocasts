@@ -13,7 +13,8 @@ type Config struct {
 }
 
 func (this *Config) Get() {
-	db.DB.Where("key = ?", this.Key).First(this)
+	// Why can't I use Where("key = ?", this.Key) ?
+	db.DB.Where(&Config{Key: this.Key}).First(this)
 }
 
 func (this *Config) Save() {

@@ -32,7 +32,11 @@
     </div>
   </div>
 
-  <a href="/screencasts/edit/{{.screencast.Slug.String}}">Edit</a>
+  {{ if .currentUser }}
+    {{ if ne .currentUser.ID 0 }}
+      <a href="/admin/screencasts/edit/{{.screencast.Slug.String}}">Edit</a>
+    {{ end }}
+  {{ end }}
 
   <a href="/">Back</a>
 
