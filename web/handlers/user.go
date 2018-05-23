@@ -41,7 +41,7 @@ var User = map[string]func(c *gin.Context){
 
 		if msg == "" {
 			user.Save()
-			c.Redirect(http.StatusMovedPermanently, "/signin")
+			c.Redirect(http.StatusFound, "/signin")
 		} else {
 			c.HTML(http.StatusOK, "users/new", gin.H{
 				"msg": msg,

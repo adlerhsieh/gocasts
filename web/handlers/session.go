@@ -13,8 +13,9 @@ import (
 
 var Session = map[string]func(c *gin.Context){
 	"new": func(c *gin.Context) {
-		if currentUser(c).ID != 0 {
-			c.Redirect(http.StatusMovedPermanently, "/")
+		fmt.Println(c.MustGet("currentUser").(models.User))
+		if c.MustGet("currentUser").(models.User).ID != 0 {
+			c.Redirect(http.StatusFound, "/")
 		}
 
 		c.HTML(http.StatusOK, "sessions/new", gin.H{})
@@ -35,17 +36,23 @@ var Session = map[string]func(c *gin.Context){
 			session.Set("id", user.ID)
 			session.Save()
 
-			c.Redirect(http.StatusMovedPermanently, "/")
+			c.Redirect(http.StatusFound, "/")
 		}
 	},
 	"destroy": func(c *gin.Context) {
 		session := sessions.Default(c)
+
+		fmt.Println("id", session.Get("id"))
+
 		session.Delete("id")
+
+		fmt.Println("id", session.Get("id"))
+
 		err := session.Save()
 		if err != nil {
 			fmt.Println(err)
 		}
 
-		c.Redirect(http.StatusMovedPermanently, "/")
+		c.Redirect(http.StatusFound, "/")
 	},
 }

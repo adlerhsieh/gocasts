@@ -13,7 +13,7 @@ func RequireAdmin(c *gin.Context) {
 	user := c.MustGet("currentUser").(models.User)
 
 	if !user.IsAdmin() {
-		c.Redirect(http.StatusMovedPermanently, "/")
+		c.Redirect(http.StatusFound, "/")
 	}
 
 	c.Next()
